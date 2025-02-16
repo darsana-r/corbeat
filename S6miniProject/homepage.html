@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corbeat</title>
+    <style>
+        * {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            left:0px;
+            right: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #021225e7;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.381);
+        }
+
+    
+        .header-signup{
+            padding: 2px 30px;
+            background-color: transparent;
+            margin:0px;
+            color: #ffffff;
+            border:1px solid transparent;
+            border-radius: 10px;
+            
+        }
+
+        .logo-container img {
+            height: 50px;
+            margin-right: 15px;
+            padding: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            
+            color: #fff;
+            padding: 10px;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+
+        section {
+            padding: 80px 20px;
+            margin: auto;
+        }
+
+        .welcome {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome h1 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 45px;
+            color: rgb(15, 30, 63);
+            margin-bottom: 1px;
+        }
+
+        .welcome p {
+            margin-top: 20px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+            color: #313030;
+        }
+
+        .welcome img {
+            
+            max-width: 100%;
+        }
+
+        .welcome div {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .lyhb {
+            border: 2px solid rgb(11, 5, 72);
+            border-radius: 3px;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .lyhb:hover {
+            background-color: #4a6cc4;
+            border: 2px solid transparent;
+            color: white;
+        }
+
+        #boxes {
+            background-color: #dad7d7;
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .services h1 {
+            color: #233a74;
+            font-size: 30px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .h1 h1 {
+            
+            color: #081c3e;
+            padding-top: 20px;
+            font-size: 40px;
+            text-align: center;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .service-box {
+            text-decoration: none;
+            background-color: rgb(255, 255, 255);
+            flex: 1 1 30%;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.384);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .service-box:hover {
+            background-color: rgba(216, 233, 250, 0.991);
+            box-shadow: 0 8px 16px rgba(2, 3, 32, 0.71);
+        }
+
+        .service-box img {
+            width: 95%;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-top:10px ;
+        }
+
+        .service-box p {
+            padding: 30px 20px;
+            font-size: 18px;
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        .cta {
+            text-align: center; 
+            padding: 20px;
+        }
+        .cta h2{
+            color: #081c3e;
+            font-size: 30px;
+        }
+
+        .cta p{
+            padding: 20px;
+            font-size: 20px;
+        }
+
+        
+        .buttons{
+            margin-top: 20px;
+            width:120px;
+            margin-left: 10px;
+            padding:10px;
+            color:rgb(0, 0, 0);
+            border-radius: 8px;
+            background-color:transparent;
+            box-shadow:2px 2px  #171b21;
+            border: 2px solid rgb(5, 13, 40);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .buttons:hover {
+            box-shadow:5px 5px 5px #313030;
+            background-color: #233a74;
+            color: #ffffff;
+
+        }
+
+        .end-section {
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            background-color: #313030;
+        }
+
+        .end-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .end-section p {
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            font-weight: 300;
+            color:rgba(216, 215, 215, 0.842)
+        }
+
+        .end-section img {
+            width: 150px;
+            padding: 20px;
+        }
+
+
+        @media (max-width: 800px) {
+      .welcome, .services {
+          flex-direction: column;
+          align-items: center;
+      }
+
+
+      .service-box {
+          max-width: 90%; 
+      }
+      .nav-links button{
+        display: none;
+      }
+
+      .header {
+            position: sticky;
+          display:flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+      }
+      .header img {
+          height: 40px;
+          margin: 5px;
+          margin-right: 15px;
+          padding: 1px;
+      }
+    }
+
+    @media (max-width: 1100px){
+      .welcome {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        display:inline;
+        text-align: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .welcome img{
+        width:100%;
+      }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="images/logoname.png" alt="Logo">
+        </div>
+        <nav class="nav-links">
+            <div></div>
+            <a href="#services">Features</a>
+            <a href="#end-section">Contact</a>
+            <a href="admin-login.html">Admin</a>
+            <a href="signup.html"><button class="header-signup">Get Started</button></a>
+        </nav>
+    </header>
+
+    <section id="welcome" class="welcome">
+        <img src="images/image.png" alt="Welcome Image">
+        <div class="intro">
+            <h1>Better Heart <br>Better Life!</h1>
+            <p>Welcome to CORBEAT, your partner in maintaining a healthy heart.<br> We are dedicated to helping you take control of your heart health. Explore our services to enhance your cardiovascular well-being.</p>
+            <a href="signup.html"><button class="buttons">Get Started</button></a>
+            <a href="#services"><button class="buttons">Learn More</button></a>
+        </div>
+    </section>
+
+    <div id="boxes">
+        <div id="services" class="h1"><h1>Advanced Features</h1></div>
+        <section class="services">
+            <div class="service-box">
+                <img src="images/quiz.png" alt="Service 1">
+                <h1>Real-time Monitoring</h1>
+                <p>Track your heart health metrics in real-time with our advanced monitoring system. Get personalized insights to reduce your risk.</p>
+            </div>
+            <div class="service-box">
+                <img src="images/predict.png" alt="Service 2">
+                <h1>Predict & Prevent</h1>
+                <p>Get accurate predictions about potential heart conditions using our AI technology.</p>
+            </div>
+            <div class="service-box">
+                <img src="images/consult.png" alt="Service 3">
+                <h1>Heart-to-Heart Consults</h1>
+                <p>Connect with certified cardiologists for professional medical advice.</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="cta">
+        <h2>Ready to Take Control of Your Heart Health?</h2>
+        <p>Join thousands of users who trust CORBEAT for their heart health monitoring.</p>
+        <a href="signup.html"><button class="buttons">Start</button></a>
+    </section>
+
+    <section id="end-section" class="end-section">
+        <div class="container-end">
+            <h2>Thank You for Visiting CORBEAT</h2>
+            <p>We hope you found the information helpful and insightful.<br>If you have any questions or need further assistance, feel free to reach out to us.<br>Email: corbeat@gmail.com</p>
+            <img src="images/logoname.png" alt="Logo">
+            <p>&copy; 2025 CORBEAT. All rights reserved.</p>
+        </div>
+    </section>
+</body>
+</html>
