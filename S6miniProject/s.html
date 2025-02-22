@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Assessment</title>
+    <link rel="stylesheet" href="s.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Risk Assessment Survey</h1>
+        <form action="#" method="POST">
+            <div class="row">
+                <!-- Personal Information Column -->
+                <div class="column">
+                    <div class="section-title">Personal Information</div>
+                    <div class="question">
+                        <label for="age">Age:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="under30" name="age" value="0">
+                                Under 30
+                            </label>
+                            <label>
+                                <input type="radio" id="30to45" name="age" value="1">
+                                30-45
+                            </label>
+                            <label>
+                                <input type="radio" id="46to60" name="age" value="2">
+                                46-60
+                            </label>
+                            <label>
+                                <input type="radio" id="over60" name="age" value="3">
+                                Over 60
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical History Column -->
+                <div class="column">
+                    <div class="section-title">Medical History</div>
+                    <div class="question">
+                        <label for="family-history">Family History of Heart Disease:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="no-family-history" name="family-history" value="0">
+                                No
+                            </label>
+                            <label>
+                                <input type="radio" id="yes-family-history" name="family-history" value="3">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="high-blood-pressure">High Blood Pressure:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="no-blood-pressure" name="high-blood-pressure" value="0">
+                                No
+                            </label>
+                            <label>
+                                <input type="radio" id="yes-blood-pressure" name="high-blood-pressure" value="2">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="high-cholesterol">High Cholesterol:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="no-cholesterol" name="high-cholesterol" value="0">
+                                No
+                            </label>
+                            <label>
+                                <input type="radio" id="yes-cholesterol" name="high-cholesterol" value="2">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="diabetes">Diabetes:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="no-diabetes" name="diabetes" value="0">
+                                No
+                            </label>
+                            <label>
+                                <input type="radio" id="yes-diabetes" name="diabetes" value="3">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="previous-heart-issues">Previous Heart Issues:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="no-heart-issues" name="previous-heart-issues" value="0">
+                                No
+                            </label>
+                            <label>
+                                <input type="radio" id="yes-heart-issues" name="previous-heart-issues" value="3">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Factors Column -->
+                <div class="column">
+                    <div class="section-title">Lifestyle Factors</div>
+                    <div class="question">
+                        <label for="smoking">Smoking:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="never-smoking" name="smoking" value="0">
+                                Never
+                            </label>
+                            <label>
+                                <input type="radio" id="occasionally-smoking" name="smoking" value="1">
+                                Occasionally
+                            </label>
+                            <label>
+                                <input type="radio" id="regularly-smoking" name="smoking" value="2">
+                                Regularly
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="alcohol-consumption">Alcohol Consumption:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="never-alcohol" name="alcohol-consumption" value="0">
+                                Never
+                            </label>
+                            <label>
+                                <input type="radio" id="occasionally-alcohol" name="alcohol-consumption" value="1">
+                                Occasionally
+                            </label>
+                            <label>
+                                <input type="radio" id="regularly-alcohol" name="alcohol-consumption" value="2">
+                                Regularly
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="physical-activity">Physical Activity:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="daily-activity" name="physical-activity" value="0">
+                                Daily
+                            </label>
+                            <label>
+                                <input type="radio" id="3-5-activity" name="physical-activity" value="1">
+                                3-5 times a week
+                            </label>
+                            <label>
+                                <input type="radio" id="1-2-activity" name="physical-activity" value="2">
+                                1-2 times a week
+                            </label>
+                            <label>
+                                <input type="radio" id="never-activity" name="physical-activity" value="3">
+                                Never
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="diet">Diet:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="very-healthy-diet" name="diet" value="0">
+                                Very Healthy
+                            </label>
+                            <label>
+                                <input type="radio" id="healthy-diet" name="diet" value="1">
+                                Healthy
+                            </label>
+                            <label>
+                                <input type="radio" id="average-diet" name="diet" value="2">
+                                Average
+                            </label>
+                            <label>
+                                <input type="radio" id="poor-diet" name="diet" value="3">
+                                Poor
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Symptoms Column -->
+                <div class="column">
+                    <div class="section-title">Symptoms</div>
+                    <div class="question">
+                        <label for="chest-pain">Chest Pain or Discomfort:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="never-chest-pain" name="chest-pain" value="0">
+                                Never
+                            </label>
+                            <label>
+                                <input type="radio" id="rarely-chest-pain" name="chest-pain" value="1">
+                                Rarely
+                            </label>
+                            <label>
+                                <input type="radio" id="sometimes-chest-pain" name="chest-pain" value="2">
+                                Sometimes
+                            </label>
+                            <label>
+                                <input type="radio" id="often-chest-pain" name="chest-pain" value="3">
+                                Often
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="shortness-of-breath">Shortness of Breath:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="never-shortness" name="shortness-of-breath" value="0">
+                                Never
+                            </label>
+                            <label>
+                                <input type="radio" id="rarely-shortness" name="shortness-of-breath" value="1">
+                                Rarely
+                            </label>
+                            <label>
+                                <input type="radio" id="sometimes-shortness" name="shortness-of-breath" value="2">
+                                Sometimes
+                            </label>
+                            <label>
+                                <input type="radio" id="often-shortness" name="shortness-of-breath" value="3">
+                                Often
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="fatigue">Fatigue:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="never-fatigue" name="fatigue" value="0">
+                                Never
+                            </label>
+                            <label>
+                                <input type="radio" id="rarely-fatigue" name="fatigue" value="1">
+                                Rarely
+                            </label>
+                            <label>
+                                <input type="radio" id="sometimes-fatigue" name="fatigue" value="2">
+                                Sometimes
+                            </label>
+                            <label>
+                                <input type="radio" id="often-fatigue" name="fatigue" value="3">
+                                Often
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="swelling">Swelling in Legs, Ankles, or Feet:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="never-swelling" name="swelling" value="0">
+                                Never
+                            </label>
+                            <label>
+                                <input type="radio" id="rarely-swelling" name="swelling" value="1">
+                                Rarely
+                            </label>
+                            <label>
+                                <input type="radio" id="sometimes-swelling" name="swelling" value="2">
+                                Sometimes
+                            </label>
+                            <label>
+                                <input type="radio" id="often-swelling" name="swelling" value="3">
+                                Often
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="dizziness">Dizziness or Light-headedness:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="never-dizziness" name="dizziness" value="0">
+                                Never
+                            </label>
+                            <label>
+                                <input type="radio" id="rarely-dizziness" name="dizziness" value="1">
+                                Rarely
+                            </label>
+                            <label>
+                                <input type="radio" id="sometimes-dizziness" name="dizziness" value="2">
+                                Sometimes
+                            </label>
+                            <label>
+                                <input type="radio" id="often-dizziness" name="dizziness" value="3">
+                                Often
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mental Health Column -->
+                <div class="column">
+                    <div class="section-title">Mental Health</div>
+                    <div class="question">
+                        <label for="stress-levels">Stress Levels:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="low-stress" name="stress-levels" value="0">
+                                Low
+                            </label>
+                            <label>
+                                <input type="radio" id="moderate-stress" name="stress-levels" value="1">
+                                Moderate
+                            </label>
+                            <label>
+                                <input type="radio" id="high-stress" name="stress-levels" value="2">
+                                High
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <label for="sleep-quality">Sleep Quality:</label>
+                        <div class="options">
+                            <label>
+                                <input type="radio" id="good-sleep" name="sleep-quality" value="0">
+                                Good
+                            </label>
+                            <label>
+                                <input type="radio" id="average-sleep" name="sleep-quality" value="1">
+                                Average
+                            </label>
+                            <label>
+                                <input type="radio" id="poor-sleep" name="sleep-quality" value="2">
+                                Poor
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="submit">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
