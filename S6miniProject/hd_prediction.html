@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Health Form</title>
+    <style>
+        * {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            left: 0px;
+            right: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #021225e7;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.381);
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .logo-container img {
+            height: 50px;
+            margin-right: 15px;
+            padding: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            margin-top: 100px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background: #1e5772;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background: #021225e7;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="images/logoname.png" alt="Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="homepage.html">Home</a>
+            <a href="risk_assessment.html">Risk-Assessment</a>
+            <a href="hd_prediction.html">HD-prediction</a>
+            <a href="doctors.html">Doctors</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Heart Health Assessment</h2>
+        <p>Please fill out this form with your health details to assess potential heart risks. Provide accurate result based on your medical reports for better assessment.</p>
+        <form action="submit.php" method="POST">
+            <label>What is your age? <input type="number" name="age" required placeholder="Enter your age"></label>
+            <label>What is your gender? 
+                <select name="sex">
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </label>
+            <label>What type of chest pain are you experiencing?
+                <select name="chest_pain">
+                    <option value="1">Typical Angina (Chest pain due to reduced blood flow)</option>
+                    <option value="2">Atypical Angina (Pain not related to heart issues)</option>
+                    <option value="3">Non-anginal Pain (Chest pain from other causes)</option>
+                    <option value="4">No Chest Pain</option>
+                </select>
+            </label>
+            <label>What is your resting blood pressure (mm Hg)? <input type="number" name="resting_bp" required placeholder="e.g., 120"></label>
+            <label>What is your cholesterol level (mg/dL)? <input type="number" name="cholesterol" required placeholder="e.g., 200"></label>
+            <label>Is your fasting blood sugar greater than 120 mg/dL?
+                <select name="fasting_blood_sugar">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </label>
+            <label>What was your resting ECG result?
+                <select name="resting_ecg">
+                    <option value="0">Normal</option>
+                    <option value="1">Abnormal ST-T Waves</option>
+                    <option value="2">Left Ventricular Hypertrophy (Heart muscle thickening)</option>
+                </select>
+            </label>
+            <label>What is the maximum heart rate you achieved? <input type="number" name="max_heart_rate" required placeholder="e.g., 150"></label>
+            <label>Did you experience chest pain during exercise?
+                <select name="exercise_angina">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </label>
+            <label>How much ST depression do you have (Oldpeak)? <input type="number" step="0.1" name="oldpeak" required placeholder="e.g., 1.5"></label>
+            <label>What is your ST slope type?
+                <select name="st_slope">
+                    <option value="1">Upsloping (Normal response)</option>
+                    <option value="2">Flat (Possible heart issue)</option>
+                    <option value="3">Downsloping (Higher risk of heart disease)</option>
+                </select>
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
