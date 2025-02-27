@@ -5,6 +5,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart Disease Risk Assessment</title>
     <link rel="stylesheet" href="s.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color:#fffafa;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 90%;
+    margin: 30px auto;
+    background-color:#eff0f2;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.container h1{
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+/* Row and Columns */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.column {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fffafa;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #061e34;
+}
+
+/* Question and Options */
+.question {
+    margin-bottom: 25px;
+}
+
+.question label {
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.options input {
+    margin-right: 10px;
+}
+
+.options label:hover {
+    background-color: #f1f1f1;
+}
+
+/* Submit Button */
+.submit {
+    text-align: center;
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: #061e34;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0d2a4d;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}
+
+/* Modal container (hidden by default) */
+.modal {
+    display: none; /* Keep it hidden until shown via JavaScript */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dim background */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    z-index: 1000;
+}
+
+/* Modal content box */
+/* Modal content box */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.4s ease-in-out;
+    position: relative;
+}
+
+/* Close button */
+.close-btn {
+    position:absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
+}
+
+
+/* Buttons */
+.button-group {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.predict-btn {
+    background-color: #070625;
+    color: white;
+}
+
+.predict-btn:hover {
+    background-color: #3B41C5;
+}
+
+.low-risk { color: #4caf50; font-weight: bold; }
+    .medium-risk { color: #ff9800; font-weight: bold; }
+    .high-risk { color: #f44336; font-weight: bold; }
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}       
+    </style>
 </head>
 <body>
     <div class="container">
@@ -356,5 +551,96 @@
             </div>
         </form>
     </div>
+    <!-- Modal Structure -->
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Risk Assessment Result</h3>
+        <p id="riskLevel"></p>
+        <p id="suggestion"></p>
+        <div class="button-group">
+            <button class="predict-btn" onclick="window.location.href='prediction.html'">Go to Prediction Page</button>
+        </div>
+    </div>
+</div>
+
+    
+     <script>
+       // Get the form element
+const form = document.querySelector("form");
+
+// Add event listener to trigger score calculation on submit
+form.addEventListener("submit", calculateScore);
+
+// Function to calculate the score
+function calculateScore(event) {
+    event.preventDefault(); // Prevent form submission
+
+    let totalScore = 0;
+
+    // Array of question names to check
+    const questions = [
+        'age',
+        'family-history',
+        'high-blood-pressure',
+        'high-cholesterol',
+        'diabetes',
+        'previous-heart-issues',
+        'smoking',
+        'alcohol-consumption',
+        'physical-activity',
+        'diet',
+        'chest-pain',
+        'shortness-of-breath',
+        'fatigue',
+        'swelling',
+        'dizziness',
+        'stress-levels', // added missing question
+        'sleep-quality'   // added missing question
+    ];
+
+    // Calculate the total score
+    questions.forEach((question) => {
+        const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+        if (selectedOption) {
+            totalScore += parseInt(selectedOption.value);
+        }
+    });
+
+    // Display the result
+    displayResults(totalScore);
+}
+
+function displayResults(score) {
+        const riskLevelElement = document.getElementById('riskLevel');
+        let riskLevel = '';
+        let suggestion = '';
+
+        if (score >= 0 && score <= 10) {
+            riskLevel = 'Low Risk';
+            suggestion = 'Maintain a healthy lifestyle and regular check-ups.';
+            riskLevelElement.className = 'risk-text low-risk';
+        } else if (score >= 11 && score <= 20) {
+            riskLevel = 'Medium Risk';
+            suggestion = 'Consider consulting a doctor and improving your daily habits.';
+            riskLevelElement.className = 'risk-text medium-risk';
+        } else {
+            riskLevel = 'High Risk';
+            suggestion = 'Urgent: Please seek medical advice immediately.';
+            riskLevelElement.className = 'risk-text high-risk';
+        }
+
+        riskLevelElement.textContent = `Your risk level is: ${riskLevel}`;
+        document.getElementById('suggestion').textContent = suggestion;
+        document.getElementById('resultModal').style.display = 'flex';
+    }
+
+    // Close modal
+    function closeModal() {
+        document.getElementById('resultModal').style.display = 'none';
+    }
+
+    </script>
+    
 </body>
 </html>
