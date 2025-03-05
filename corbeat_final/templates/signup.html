@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logoname.png') }}" alt="Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </nav>
+    </header>
+    <div class="log_box">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}">
+        </div>
+        <form id="log_form" method="POST" action="{{ url_for('signup') }}">
+            <h2>CORBEAT</h2>
+            <div class="form_el">
+                <input type="text" name="username" placeholder="Username" required><br>
+            </div>
+            <div class="form_el">
+                <input type="password" name="password" placeholder="Password" required><br>
+            </div>
+            <div class="form_el">
+                <input type="password" name="cpassword" placeholder="Confirm Password" required><br>
+            </div>
+            <div class="form_el">
+                <input type="email" name="email" placeholder="E-mail Address" required><br>
+            </div>
+            <button type="submit">Sign Up</button>
+            <p class="sign">Have an account? <a href="{{ url_for('login') }}">Log In</a></p>
+        </form>
+    </div>
+</body>
+</html>
