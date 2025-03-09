@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+import { getDatabase, ref, set, push, get, child } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDEZUfJqTkfxqBZ4iYHeUifWRlmlPzTDnM",
   authDomain: "admin-e4bb2.firebaseapp.com",
@@ -9,28 +10,7 @@ const firebaseConfig = {
   messagingSenderId: "659079512539",
   appId: "1:659079512539:web:54a00d7022b420ccb527fe"
 };
-/*
-firebase.initializeApp(firebaseConfig);
-//reference for database
-var doctorFormDB=firebase.database().ref('doctorForm');
 
-document.getElementById("doctorForm").addEventListener("submit", submitForm);
-
-function submitForm(e) {
-  e.preventDefault();
-
-  var id = getElementVal("doctor-id");
-  var name = getElementVal("doctor-name");
-  var emailid = getElementVal("email");
-  var contact = getElementVal("contact");
-  var hname = getElementVal("hospital-name");
-  var exp = getElementVal("experience");
-  console.log(id,name,emailid,contact,hname,exp);
-}
-const getElementVal =(id) =>{
-    return document.getElementById('id').value;
-
-};*/
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -39,7 +19,7 @@ const db = getDatabase(app);
 const doctorFormDB = ref(db, "doctorForm");
 
 // Form Submission
-document.querySelector(".doctorForm").addEventListener("submit", (e) => {
+document.querySelector(".doctorForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const id = getElementVal("doctor-id");
@@ -49,13 +29,32 @@ document.querySelector(".doctorForm").addEventListener("submit", (e) => {
   const hospitalName = getElementVal("hospital-name");
   const experience = getElementVal("experience");
 
+  // Check if any field is empty
+  if (!id || !name || !email || !contact || !hospitalName || !experience) {
+    alert("All fields are required!");
+    return;
+  }
+
+  // Check if doctor ID already exists
+  const doctorExists = await checkDoctorExists(id);
+  if (doctorExists) {
+    alert("Doctor with this ID already exists!");
+    return;
+  }
+
+  // Save doctor data if ID is unique
   saveDoctor(id, name, email, contact, hospitalName, experience);
 });
 
+// Function to check if doctor ID already exists
+const checkDoctorExists = async (id) => {
+  const snapshot = await get(child(ref(db), `doctorForm/${id}`));
+  return snapshot.exists();
+};
+
 // Function to save doctor data
 const saveDoctor = (id, name, email, contact, hospitalName, experience) => {
-  const newDoctorRef = push(doctorFormDB); // Push a new entry
-  set(newDoctorRef, {
+  set(ref(db, `doctorForm/${id}`), {
     id,
     name,
     email,
@@ -72,5 +71,3 @@ const saveDoctor = (id, name, email, contact, hospitalName, experience) => {
 
 // Function to get input values
 const getElementVal = (id) => document.getElementById(id).value;
-
- 
