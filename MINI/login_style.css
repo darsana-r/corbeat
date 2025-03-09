@@ -1,0 +1,140 @@
+body{
+    font-family:"Cambria, Cochin, Georgia, Times, 'Times New Roman', serif";
+    color:#072139;
+    background-color: #b3cecea2;
+    margin:0px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px 0px 10px;
+    background-image: linear-gradient(to right, rgb(10, 21, 43), rgb(6, 52, 108)); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.381);
+    margin: 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+    margin-right: 15px;
+    padding: 5px;
+
+}
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    color: #ffffff;
+    padding: 10px;
+    border: 2px solid transparent;
+
+}
+
+.nav-links a:hover {
+    color: white;
+    border-radius: 10px;
+    border: 2px solid white
+}
+
+
+.log_box{
+    width:300px;
+    margin:50px auto;
+    padding:20px;
+    background-color:white;
+    border:1 px solid #ddd;
+    box-shadow:0 0 10px rgba(0,0,0,0.5);
+}
+.log_box h2{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color:#061e34;
+}
+
+.logo{
+    text-align: center;
+    
+}
+
+.logo img{
+    width:60px;
+}
+.logo img:hover{
+    width:65px;
+    
+}
+
+.form_el{
+    margin-bottom: 15px;
+}
+
+.form_el input[type="text"],.form_el input[type="password"],.form_el input[type="email"]{
+    width:100%;
+    height:40px;
+    padding:10px;
+    border:1px solid #ccc;
+    background-color:white;
+    color:rgb(19, 19, 19);
+}
+
+button{
+    width:100%;
+    height:40px;
+    background-color: #082c6b;
+    color:white;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+button:hover{
+    background-color:#061e34 ;
+}
+a{
+    text-decoration: none;
+    color:#082c6b;
+}
+a:hover{
+    color:#061e34;
+}
+
+.sign{
+    display:flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+    .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    }
+    .header img {
+    height: 40px;
+    margin: 5px;
+    margin-right: 15px;
+    padding: 3px;
+
+    }}
+    .messageDiv{
+        background-color:hsl(327,90%,28%);
+        color:white;
+        padding:10px 20px;
+        margin:10px;
+        border-radius: 5px;
+        font-size:1rem;
+        opacity:0;
+        animation:fadeOut 7s forwards;
+    
+    }
