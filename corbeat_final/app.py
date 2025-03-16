@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Change this to a secure key
+app.secret_key = "your_secret_key"  
 
 # Train model if not found
 MODEL_PATH = "heart_model.pkl"
@@ -33,6 +33,33 @@ with open(MODEL_PATH, "rb") as f:
 def homepage():
     return render_template("homepage.html")
 
+@app.route("/login", methods=["POST"])
+def login():
+    if request.method == "POST":
+        try:
+            # Get JSON data sent from frontend
+            user_data = request.json
+            email = user_data.get("email")
+            password = user_data.get("password")
+            
+            # Assuming successful login from Firebase (you may want to add more checks)
+            if email:  # Firebase has already authenticated the user
+
+                # Save the user in the Flask session
+                session["user"] = email
+
+                # Return success message to frontend
+                return jsonify({"message": "Login successful"})
+            else:
+                return jsonify({"message": "Invalid credentials"}), 401
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
 @app.route("/doctors")
 def doctors():
     return render_template("doctors.html")
@@ -44,25 +71,7 @@ def user_home():
     return redirect(url_for("login"))  # Redirect to login if not authenticated
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-        
-        # Example authentication logic (replace with database lookup)
-        if username == "user" and password == "1234":
-            session["user"] = username
-            return redirect(url_for("user_home"))
-        else:
-            return render_template("login.html", error="Invalid username or password")
-    
-    return render_template("login.html")
 
-
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
 
 
 @app.route("/home")
@@ -80,7 +89,7 @@ def admin():
 @app.route("/logout")
 def logout():
     session.pop("user", None)
-    return redirect(url_for("homepage"))
+    return render_template("homepage.html")
 
 @app.route("/risk_assessment", methods=["GET", "POST"])
 def risk_assessment():
@@ -109,7 +118,7 @@ def hd_prediction():
 
             # Make prediction
             prediction = model.predict(input_data)[0]
-            result = "The person has Heart Disease" if prediction == 1 else "The person does not have Heart Disease"
+            result = "You Have Heart Disease" if prediction == 1 else "You Have no Heart Disease"
 
             return render_template("hd_prediction.html", prediction_result=result)
 
