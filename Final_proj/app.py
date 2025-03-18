@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 import pandas as pd
 import numpy as np
@@ -6,9 +7,6 @@ import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import sqlite3
-
-app = Flask(__name__)
-
 
 
 app = Flask(__name__)
@@ -39,6 +37,7 @@ with open(MODEL_PATH, "rb") as f:
 def home():
     return render_template('homepage.html')
 
+
 # Route for Signup Page
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -46,6 +45,7 @@ def signup():
         # Process signup data (e.g., store in Firebase)
         return redirect({{ url_for('login') }})  # Redirect to login page after signup
     return render_template('signup.html')
+
 
 # Route for Login Page
 @app.route('/login', methods=['GET', 'POST'])
@@ -55,30 +55,32 @@ def login():
         return redirect({{ url_for('userHome') }})
     return render_template('login.html')  # This ensures Flask looks for the file
 
-#@app.route('/login', methods=['GET', 'POST'])
-#def login():
-   # if request.method == 'POST':
-        # Authenticate user (e.g., check Firebase credentials)
-      #  return redirect(url_for('homepage'))  # Redirect to user home after login
-   # return render_template('login.html')
 
-# Route for User Home Page
+#route for home page of user
+@app.route('/userHome')
+def userHome():
+    return render_template('userHome.html')
+
+
+#route for doctors database
 @app.route("/doctors")
 def doctors():
     return render_template("doctors.html")
 
 
-@app.route('/userHome')
-def userHome():
-    return render_template('userHome.html')
+#route for landing page
 @app.route('/logout')
 def logout():
     return render_template('homepage.html')
 
+
+#route for admin login page
 @app.route("/admin_login")
 def admin_login():
     return render_template("admin_login.html")
 
+
+#admin dashboard
 @app.route("/admin")
 def admin():
 
@@ -91,15 +93,17 @@ def admin():
     conn.close()
     
     return render_template('admin.html', total_predictions=total_predictions)
-    # return render_template("admin.html")
 
 
+#HD risk assessment survey
 @app.route("/risk_assessment", methods=["GET", "POST"])
 def risk_assessment():
     if request.method == "POST":
         return jsonify({"message": "Risk assessment completed"})
     return render_template("risk_assessment.html")
 
+
+#HD prediction
 @app.route("/hd_prediction", methods=["GET", "POST"])
 def hd_prediction():
     if request.method == "POST":
@@ -151,3 +155,4 @@ def hd_prediction():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
