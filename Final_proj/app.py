@@ -5,7 +5,7 @@ import pickle
 import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-
+import sqlite3
 
 app = Flask(__name__)
 
@@ -52,7 +52,7 @@ def signup():
 def login():
     if request.method == 'POST':
         # Authenticate user
-        return redirect({{ url_for('homepage') }})
+        return redirect({{ url_for('userHome') }})
     return render_template('login.html')  # This ensures Flask looks for the file
 
 #@app.route('/login', methods=['GET', 'POST'])
@@ -81,7 +81,17 @@ def admin_login():
 
 @app.route("/admin")
 def admin():
-    return render_template("admin.html")
+
+    conn = sqlite3.connect('heart_data.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT COUNT(*) FROM patient_data')
+    total_predictions = cursor.fetchone()[0]
+    
+    conn.close()
+    
+    return render_template('admin.html', total_predictions=total_predictions)
+    # return render_template("admin.html")
 
 
 @app.route("/risk_assessment", methods=["GET", "POST"])
@@ -95,33 +105,49 @@ def hd_prediction():
     if request.method == "POST":
         try:
             # Extract input values from form
-            input_data = np.array([[
-                int(request.form["age"]),
-                int(request.form["sex"]),
-                int(request.form["chest_pain"]),
-                int(request.form["resting_bp"]),
-                int(request.form["cholesterol"]),
-                int(request.form["fasting_blood_sugar"]),
-                int(request.form["resting_ecg"]),
-                int(request.form["max_heart_rate"]),
-                int(request.form["exercise_angina"]),
-                float(request.form["oldpeak"]),
-                int(request.form["st_slope"])
-            ]])
+            age = int(request.form["age"])
+            sex = int(request.form["sex"])
+            chest_pain = int(request.form["chest_pain"])
+            resting_bp = int(request.form["resting_bp"])
+            cholesterol = int(request.form["cholesterol"])
+            fasting_blood_sugar = int(request.form["fasting_blood_sugar"])
+            resting_ecg = int(request.form["resting_ecg"])
+            max_heart_rate = int(request.form["max_heart_rate"])
+            exercise_angina = int(request.form["exercise_angina"])
+            oldpeak = float(request.form["oldpeak"])
+            st_slope = int(request.form["st_slope"])
+
+            # Prepare the input data for prediction
+            input_data = np.array([[age, sex, chest_pain, resting_bp, cholesterol,
+                                    fasting_blood_sugar, resting_ecg, max_heart_rate,
+                                    exercise_angina, oldpeak, st_slope]])
 
             # Make prediction
             prediction = model.predict(input_data)[0]
 
-            
-            result = "Oops!!! You Have Heart Disease" if prediction == 1 else "Congratulations!!! You Have NO Heart Disease"
+            # Prepare the result message
+            prediction_result = "Oops!!! You Have Heart Disease" if prediction == 1 else "Congratulations!!! You Have NO Heart Disease"
 
-            return render_template("hd_prediction.html", prediction_result=result)
+            # Save data to the database
+            conn = sqlite3.connect('heart_data.db')
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO patient_data (age, sex, chest_pain, resting_bp, cholesterol, 
+                                          fasting_blood_sugar, resting_ecg, max_heart_rate, 
+                                          exercise_angina, oldpeak, st_slope, prediction_result)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (age, sex, chest_pain, resting_bp, cholesterol, fasting_blood_sugar,
+                  resting_ecg, max_heart_rate, exercise_angina, oldpeak, st_slope, prediction_result))
+            conn.commit()
+            conn.close()
+
+            # Display the result to the user
+            return render_template("hd_prediction.html", prediction_result=prediction_result)
 
         except Exception as e:
             return jsonify({"error": str(e)})
 
     return render_template("hd_prediction.html")
-
 
 if __name__ == '__main__':
     app.run(debug=True)

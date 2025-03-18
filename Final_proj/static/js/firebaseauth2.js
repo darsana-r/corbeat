@@ -90,7 +90,7 @@ signUp.addEventListener('click',(event)=>{
       const user=userCredential.user;
       localStorage.setItem('loggedInUserId', user.uid);
       console.log("redirecting to homepage");
-      window.location.href='/homepage';
+      window.location.href='/userHome';
       })
       .catch((error)=>{
           const errorCode=error.code;
