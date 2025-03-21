@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corbeat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+</head>
+<body>
+   
+    <header class="header">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logoname.png') }}" alt="Logo">
+        </div>
+        <nav class="nav-links">
+            <div></div>
+            <a href="#services">Features</a>
+            <a href="#end-section">Contact</a>
+            <a href="{{ url_for('admin_login') }}"><button">admin</button></a>
+            <a href="{{ url_for('login') }}"><button class="header-signup">Login</button></a>
+        </nav>
+    </header>
+
+    <section id="welcome" class="welcome">
+        <img src="{{ url_for('static', filename='images/image.png') }}" alt="Welcome Image">
+        <div class="intro">
+            <h1>Better Heart <br>Better Life!</h1>
+            <p>Welcome to CORBEAT, your partner in maintaining a healthy heart.<br> We are dedicated to helping you take control of your heart health. Explore our services to enhance your cardiovascular well-being.</p>
+            <a href="{{ url_for('signup') }}"><button class="buttons">Get Started</button></a>
+            <a href="#services"><button class="buttons">Learn More</button></a>
+        </div>
+    </section>
+    
+    <div id="boxes">
+        <div id="services" class="h1"><h1>Advanced Features</h1></div>
+        <section class="services">
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='images/quiz.png') }}" alt="Service 1">
+                <h1>Real-time Monitoring</h1>
+                <p>Track your heart health metrics in real-time with our advanced monitoring system. Get personalized insights to reduce your risk.</p>
+            </div>
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='images/predict.png') }}" alt="Service 2">
+                <h1>Predict & Prevent</h1>
+                <p>Get accurate predictions about potential heart conditions using our AI technology.</p>
+            </div>
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='images/consult.png') }}" alt="Service 3">
+                <h1>Heart-to-Heart Consults</h1>
+                <p>Connect with certified cardiologists for professional medical advice.</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="cta">
+        <h2>Ready to Take Control of Your Heart Health?</h2>
+        <p>Join thousands of users who trust CORBEAT for their heart health monitoring.</p>
+        <a href="{{ url_for('signup') }}"><button class="buttons">Start</button></a>
+    </section>
+
+    <section id="end-section" class="end-section">
+        <div class="container-end">
+            <h2>Thank You for Visiting CORBEAT</h2>
+            <p>We hope you found the information helpful and insightful.<br>If you have any questions or need further assistance, feel free to reach out to us.<br>Email: corbeat@gmail.com</p>
+            <img src="{{ url_for('static', filename='images/logoname.png') }}" alt="Logo">
+            <p>&copy; 2025 CORBEAT. All rights reserved.</p>
+        </div>
+    </section>
+</body>
+</html>
