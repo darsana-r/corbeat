@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 import os
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import sqlite3
 
@@ -21,6 +22,7 @@ if not os.path.exists(MODEL_PATH):
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, stratify=Y, random_state=2)
 
     model = LogisticRegression()
+    #model=RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X_train, Y_train)
 
     with open(MODEL_PATH, "wb") as f:
