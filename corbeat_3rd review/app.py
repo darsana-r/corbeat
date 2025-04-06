@@ -10,7 +10,8 @@ import sqlite3
 
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  
+app.secret_key="your_secret_key"
+
 
 # Train model if not found
 MODEL_PATH = "heart_model.pkl"
@@ -20,9 +21,11 @@ if not os.path.exists(MODEL_PATH):
     X = dataset.drop(columns="target", axis=1)
     Y = dataset["target"]
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, stratify=Y, random_state=2)
-
-    model = LogisticRegression()
-    #model=RandomForestClassifier(n_estimators=100, random_state=42)
+     
+    #here we tested two ML model (LR,RF).RF get high accuracy
+    #model = LogisticRegression()
+    
+    model=RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X_train, Y_train)
 
     with open(MODEL_PATH, "wb") as f:
@@ -34,6 +37,7 @@ with open(MODEL_PATH, "rb") as f:
 
 
 # Route for Home Page
+
 @app.route('/')
 def home():
     return render_template('homepage.html')
@@ -43,8 +47,7 @@ def home():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        # Process signup data (e.g., store in Firebase)
-        return redirect({{ url_for('login') }})  # Redirect to login page after signup
+        return redirect(url_for('login'))
     return render_template('signup.html')
 
 
@@ -53,8 +56,8 @@ def signup():
 def login():
     if request.method == 'POST':
         # Authenticate user
-        return redirect({{ url_for('userHome') }})
-    return render_template('login.html')  # This ensures Flask looks for the file
+        return redirect( url_for('userHome'))
+    return render_template('login.html') 
 
 
 #route for home page of user
@@ -78,6 +81,21 @@ def logout():
 #route for admin login page
 @app.route("/admin_login")
 def admin_login():
+    ADMIN_USERNAME = "admin"
+    ADMIN_PASSWORD = "corbeat"
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session['admin'] = True  
+            flash("Login successful!", "success")
+            return redirect(url_for('admin_dashboard'))
+        else:
+            flash("Invalid username or password!", "danger")
+
+    
     return render_template("admin_login.html")
 
 
@@ -131,7 +149,7 @@ def hd_prediction():
             prediction = model.predict(input_data)[0]
 
             # Prepare the result message
-            prediction_result = "Oops!!! You Have Heart Disease" if prediction == 1 else "Congratulations!!! You Have NO Heart Disease"
+            prediction_result = "Warning!!!  There's a strong possibility of heart disease." if prediction == 1 else "Congratulations! You have a very low chance of heart disease"
 
             # Save data to the database
             conn = sqlite3.connect('heart_data.db')
